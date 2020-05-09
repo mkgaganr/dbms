@@ -24,3 +24,7 @@ SELECT S.sname FROM Suppliers S
 
 SELECT DISTINCT C.sid FROM Catalog C
       WHERE C.cost > ( SELECT AVG (C1.cost) FROM Catalog C1 WHERE C1.pid = C.pid );
+
+
+SELECT P.pid, S.sname FROM Parts P, Suppliers S, Catalog C
+      WHERE C.pid = P.pid AND C.sid = S.sid AND C.cost = (SELECT MAX (C1.cost) FROM Catalog C1 WHERE C1.pid = P.pid);
